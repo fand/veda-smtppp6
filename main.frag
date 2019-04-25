@@ -12,9 +12,9 @@
   // vertexMode: "POINTS",
 
   "IMPORTED": {
-    v1: { PATH: "./vj/beeple/beeple00020.mp4" },
-    v2: { PATH: "./vj/tatsuya/tatsuya00034.mov" },
-    v3: { PATH: './vj/beeple/beeple00010.mp4' },
+    v0: { PATH: "./vj/beeple/beeple00020.mp4" },
+    v1: { PATH: "./vj/tatsuya/tatsuya00034.mov" },
+    v2: { PATH: './vj/beeple/beeple00010.mp4' },
   },
   PASSES: [
     // { fs: "mem.frag", TARGET: "mem", FLOAT: true },
@@ -33,6 +33,7 @@ uniform sampler2D vertBuffer;
 uniform sampler2D osc_note;
 uniform sampler2D osc_beat;
 uniform sampler2D midi;
+uniform sampler2D v0;
 uniform sampler2D v1;
 uniform sampler2D v2;
 uniform sampler2D v3;
@@ -291,20 +292,20 @@ float metaballs(in vec2 uv) {
 
 vec4 draw(in vec2 uv) {
   vec4 c = vec4(0);
-  if (o48 > .0) c += dBalls(uv) * m0;
-  // c += dBalls((uv - .5) * (uv - .3) * 2.) * m0;
-  if (o49 > .0) c += dStripes(uv) * m1;
-  if (o50 > .0) c += dTunnel(uv) * m2;
-  if (o51 > .0) c += dTri(uv) * m3;
-
+  // if (o48 > .0) c += dBalls(uv) * m0;
+  // if (o49 > .0) c += dStripes(uv) * m1;
+  // if (o50 > .0) c += dTunnel(uv) * m2;
+  // if (o51 > .0) c += dTri(uv) * m3;
   // if (o52 > .0) c += texture2D(vertBuffer, abs(uv - 5. + sin(time))) * m4;
-  if (o52 > .0) c += texture2D(vertBuffer, fract(uv)) * m4;
-  if (o53 > .0) c.r += dHex(uv) * m5;
-  if (o54 > .0) c += metaballs(uv) * m6;
-  if (o55 > .0) c += dWaves(uv) * m7;
+  // if (o52 > .0) c += texture2D(vertBuffer, fract(uv)) * m4;
+  // if (o53 > .0) c.r += dHex(uv) * m5;
+  // if (o54 > .0) c += metaballs(uv) * m6;
+  // if (o55 > .0) c += dWaves(uv) * m7;
 
-  // c += texture2D(vertBuffer, uv);
-  // c += dBalls(uv);
+  if (o48 > .0) c += texture2D(uv, v0) * m0;
+  if (o49 > .0) c += texture2D(uv, v1) * m1;
+  if (o50 > .0) c += texture2D(uv, v2) * m2;
+  if (o51 > .0) c += texture2D(uv, v3) * m3;
 
   return c;
 }
