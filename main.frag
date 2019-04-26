@@ -61,9 +61,7 @@ float dBalls(in vec2 uv) {
 
   // p /= floor(p + sin(a + time));
 
-
-
-p *= .8;
+  p *= .8;
   float r = .5;
 
   // ring
@@ -302,10 +300,10 @@ vec4 draw(in vec2 uv) {
   // if (o54 > .0) c += metaballs(uv) * m6;
   // if (o55 > .0) c += dWaves(uv) * m7;
 
-  if (o48 > .0) c += texture2D(uv, v0) * m0;
-  if (o49 > .0) c += texture2D(uv, v1) * m1;
-  if (o50 > .0) c += texture2D(uv, v2) * m2;
-  if (o51 > .0) c += texture2D(uv, v3) * m3;
+  if (o48 > .0) c += texture2D(v0, uv) * m0;
+  if (o49 > .0) c += texture2D(v1, uv) * m1;
+  if (o50 > .0) c += texture2D(v2, uv) * m2;
+  if (o51 > .0) c += texture2D(v3, uv) * m3;
 
   return c;
 }
