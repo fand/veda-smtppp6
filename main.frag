@@ -12,9 +12,13 @@
   // vertexMode: "POINTS",
 
   "IMPORTED": {
-    v0: { PATH: "./vj/beeple/beeple00020.mp4" },
-    v1: { PATH: "./vj/tatsuya/tatsuya00034.mov" },
-    v2: { PATH: './vj/beeple/beeple00010.mp4' },
+    v0: { PATH: "./sozai/logo1.png" },
+    v1: { PATH: "./sozai/unyalene1.png" },
+
+    v2: { PATH: './vj/beeple/beeple00032.mp4' },
+    v3: { PATH: "./vj/beeple/beeple00038.mp4" },
+    v4: { PATH: "./vj/tatsuya/tatsuya00035.mov" },
+    v5: { PATH: './vj/beeple/beeple00010.mp4' },
   },
   PASSES: [
     // { fs: "mem.frag", TARGET: "mem", FLOAT: true },
@@ -37,6 +41,10 @@ uniform sampler2D v0;
 uniform sampler2D v1;
 uniform sampler2D v2;
 uniform sampler2D v3;
+uniform sampler2D v4;
+uniform sampler2D v5;
+uniform sampler2D v6;
+uniform sampler2D v7;
 uniform float volume;
 
 #define PI 3.141593
@@ -72,11 +80,11 @@ float dBalls(in vec2 uv) {
   t = (1. - t) * loopLength + time;
 
   // TBD: modify r, p
-  if (fract(time) < .2) {
-    p *= p;
-  }
+  // if (fract(time) < .2) {
+  //   p *= p;
+  // }
 
-  r += sin(t + atan(p.y, p.x) * 8.) *.2;
+  // r += sin(t + atan(p.y, p.x) * 8.) *.2;
 
   // balls
   float ct = cos(t), st = sin(t);
@@ -87,20 +95,20 @@ float dBalls(in vec2 uv) {
   c += .03 / length(p - c2);
 
 
-  c1 = rot(c1, PI *.5);
-  c2 = rot(c2, PI *.5);
-  c += .05 / length(p - c1);
-  c += .05 / length(p - c2);
-
-  p = rot(p, time);
-  p = abs(p);
-
-  p *= .2;
-
-  c1 = rot(c1, PI *.2);
-  c2 = rot(c2, PI *.2);
-  c += .05 / length(p - c1);
-  c += .05 / length(p - c2);
+  // c1 = rot(c1, PI *.5);
+  // c2 = rot(c2, PI *.5);
+  // c += .05 / length(p - c1);
+  // c += .05 / length(p - c2);
+  //
+  // p = rot(p, time);
+  // p = abs(p);
+  //
+  // p *= .2;
+  //
+  // c1 = rot(c1, PI *.2);
+  // c2 = rot(c2, PI *.2);
+  // c += .05 / length(p - c1);
+  // c += .05 / length(p - c2);
 
   return c;
 }
@@ -109,7 +117,7 @@ float dStripes(in vec2 uv) {
   vec2 uv0 = uv;
 
   float tt = floor(time / loopLength);
-  uv = rot(uv, time * .3);
+  uv = rot(uv, time * .1);
 
   float b = exp(fract(beat * 2.) * -4.);
 
@@ -290,20 +298,17 @@ float metaballs(in vec2 uv) {
 
 vec4 draw(in vec2 uv) {
   vec4 c = vec4(0);
-  // if (o48 > .0) c += dBalls(uv) * m0;
-  // if (o49 > .0) c += dStripes(uv) * m1;
-  // if (o50 > .0) c += dTunnel(uv) * m2;
-  // if (o51 > .0) c += dTri(uv) * m3;
-  // if (o52 > .0) c += texture2D(vertBuffer, abs(uv - 5. + sin(time))) * m4;
-  // if (o52 > .0) c += texture2D(vertBuffer, fract(uv)) * m4;
-  // if (o53 > .0) c.r += dHex(uv) * m5;
-  // if (o54 > .0) c += metaballs(uv) * m6;
-  // if (o55 > .0) c += dWaves(uv) * m7;
-
   if (o48 > .0) c += texture2D(v0, uv) * m0;
   if (o49 > .0) c += texture2D(v1, uv) * m1;
+
   if (o50 > .0) c += texture2D(v2, uv) * m2;
   if (o51 > .0) c += texture2D(v3, uv) * m3;
+  if (o52 > .0) c += texture2D(v4, uv) * m4;
+  if (o53 > .0) c += texture2D(v5, uv) * m5;
+
+  // if (o52 > .0) c += dBalls(uv) * m4;
+  // if (o53 > .0) c += dStripes(uv) * m5;
+  if (o54 > .0) c += texture2D(vertBuffer, fract(uv)) * m6;
 
   return c;
 }
@@ -321,6 +326,6 @@ void main() {
   }
   else if (PASSINDEX == 2) {
     vec4 c = texture2D(renderBuffer, uv);
-    gl_FragColor = post(c);
+    gl_FragColor = post(c) * m7;
   }
 }

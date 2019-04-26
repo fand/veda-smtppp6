@@ -55,7 +55,7 @@ vec3 bloom(vec2 dir) {
 }
 
 vec4 oInvert(in vec4 c, in vec2 uv, in vec2 p, in float ch) {
-  if (ch == 1.) {
+  if (ch > 0.) {
     c.rgb = 1. - c.rgb;
   } else {
     c.rgb = mix(c.rgb, 1. - c.rgb, step(.4, snoise(vec3(uv.xx, time * 3. * ch) * ch * 3.)));

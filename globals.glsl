@@ -29,6 +29,9 @@ float o28;
 float o29;
 float o30;
 
+float o40;
+float o41;
+
 float o48;
 float o49;
 float o50;
