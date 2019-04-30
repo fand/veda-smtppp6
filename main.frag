@@ -12,12 +12,14 @@
   // vertexMode: "POINTS",
 
   "IMPORTED": {
-    v0: { PATH: "./sozai/logo1.png" },
-    v1: { PATH: "./sozai/unyalene1.png" },
+    v0: { PATH: "./sozai/logo2.png" },
+    v1: { PATH: "./sozai/daiksy3.png" },
 
-    v2: { PATH: './vj/beeple/beeple00032.mp4' },
-    v3: { PATH: "./vj/beeple/beeple00038.mp4" },
-    v4: { PATH: "./vj/tatsuya/tatsuya00035.mov" },
+    // v1: { PATH: "./sozai/reiwa.mp4" },
+
+    v2: { PATH: './vj/beeple/beeple00150.mp4' },
+    v3: { PATH: "./vj/beeple/beeple00219.mp4" },
+    v4: { PATH: "./vj/tatsuya/tatsuya00075.mov" },
     v5: { PATH: './vj/beeple/beeple00010.mp4' },
   },
   PASSES: [
